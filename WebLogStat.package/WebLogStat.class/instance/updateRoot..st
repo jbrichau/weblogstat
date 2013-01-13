@@ -1,11 +1,13 @@
 rendering
 updateRoot: aRoot
 
+
 	aRoot javascript resourceUrl: '/js/jquery-1.7.1.min.js'.
 	aRoot javascript resourceUrl: '/js/jquery-ui-1.8.18.min.js'.
 	aRoot javascript resourceUrl: '/js/d3.min.js'.
 	aRoot javascript resourceUrl: '/js/d3.layout.min.js'.
 	aRoot javascript resourceUrl: '/js/rickshaw.min.js'.
+	aRoot stylesheet resourceUrl: '/js/bootstrap.min.css'.
 	aRoot stylesheet resourceUrl: '/js/rickshaw.min.css'.
 	aRoot addStyle:  '<style>
 .chart_container {
