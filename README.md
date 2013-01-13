@@ -41,7 +41,7 @@ WebLogStat is currently under development and not ready for public use.
 ```Smalltalk
 	(Smalltalk at: #Metacello) new
 		baseline: 'WebLogStat';
-		repository: 'github://jbrichau/weblogstat';
+		repository: 'github://jbrichau/weblogstat/packages';
 		load.
 ```
 
