@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfWebLogStats",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfWebLogStats",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
