@@ -22,26 +22,34 @@ WebLogStat is currently under development and not ready for public use.
     ((Smalltalk at: #ConfigurationOfFileTree) project version: #'stable') load.
 ```
 
-* Load [Twitter Bootstrap](http://twitter.github.com/bootstrap/) in the Pharo image:
+* Load Metacello version 1.0-beta.32
 
 ```Smalltalk
+	"Get the Metacello configuration"
 	Gofer new
-      url: 'http://ss3.gemstone.com/ss/TwitterBootstrap';
-      package: 'ConfigurationOfTwitterBootstrap';
-      load.
-    (Smalltalk at: #ConfigurationOfTwitterBootstrap) project load.
-```
-The above step will automatically install Seaside 3.0.x.
+  		gemsource: 'metacello';
+  		package: 'ConfigurationOfMetacello';
+  		load.
 
-* Download [Rickshaw](http://code.shutterstock.com/rickshaw/) and its prerequisite js library [d3](http://www.d3js.org).
+	"Bootstrap Metacello 1.0-beta.32, using mcz files"
+	((Smalltalk at: #ConfigurationOfMetacello) project 
+  		version: '1.0-beta.32') load.
+```
 
 * Load WebLogStat
 
 ```Smalltalk
-	Gofer new
-      url: 'http://ss3.gemstone.com/ss/TwitterBootstrap';
-      package: 'ConfigurationOfTwitterBootstrap';
-      load.
-    (Smalltalk at: #ConfigurationOfTwitterBootstrap) project load.
+	(Smalltalk at: #Metacello) new
+		baseline: 'WebLogStat';
+		repository: 'github://jbrichau/weblogstat';
+		load.
 ```
 
+* Download the [Rickshaw](http://code.shutterstock.com/rickshaw/) js graphing library and its prerequisite js library [d3](http://www.d3js.org).
+
+## Dependencies
+
+WebLogStat uses:
+* Twitter Bootstrap (and its Seaside wrapper)
+* Twitter Bootstrap
+* [Rickshaw](http://code.shutterstock.com/rickshaw/) js graphing library (which requires [d3](http://www.d3js.org))
