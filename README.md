@@ -10,9 +10,9 @@ WebLogStat is currently under development and not ready for public use.
 
 ## How to install WebLogStat
 
-* Download the last stable (Pharo)[http://www.pharo-project.org].
+* Download the last stable [Pharo Smalltalk](http://www.pharo-project.org).
 
-* Load FileTree:
+* Load [FileTree](https://github.com/dalehenrich/filetree) in the Pharo image:
 
 ```Smalltalk
 	Gofer new
@@ -22,10 +22,10 @@ WebLogStat is currently under development and not ready for public use.
     ((Smalltalk at: #ConfigurationOfFileTree) project version: #'stable') load.
 ```
 
-* Load [Twitter Bootstrap](http://twitter.github.com/bootstrap/):
+* Load [Twitter Bootstrap](http://twitter.github.com/bootstrap/) in the Pharo image:
 
 ```Smalltalk
-Gofer new
+	Gofer new
       url: 'http://ss3.gemstone.com/ss/TwitterBootstrap';
       package: 'ConfigurationOfTwitterBootstrap';
       load.
@@ -33,14 +33,15 @@ Gofer new
 ```
 The above step will automatically install Seaside 3.0.x.
 
-* Download [Rickshaw](http://code.shutterstock.com/rickshaw/) and its prerequisite [d3](http://www.d3js.org).
+* Download [Rickshaw](http://code.shutterstock.com/rickshaw/) and its prerequisite js library [d3](http://www.d3js.org).
 
-* Load [Twitter Bootstrap](http://twitter.github.com/bootstrap/):
+* Load WebLogStat
 
 ```Smalltalk
-Gofer new
+	Gofer new
       url: 'http://ss3.gemstone.com/ss/TwitterBootstrap';
       package: 'ConfigurationOfTwitterBootstrap';
       load.
     (Smalltalk at: #ConfigurationOfTwitterBootstrap) project load.
 ```
+
