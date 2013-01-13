@@ -22,7 +22,7 @@ WebLogStat is currently under development and not ready for public use.
     ((Smalltalk at: #ConfigurationOfFileTree) project version: #'stable') load.
 ```
 
-* Load Metacello version 1.0-beta.32
+* Load [Metacello](https://github.com/dalehenrich/metacello-work) version 1.0-beta.32
 
 ```Smalltalk
 	"Get the Metacello configuration"
