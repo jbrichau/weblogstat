@@ -1,0 +1,14 @@
+{
+	"category" : "WebLogStat",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "WebLogStat",
+	"pools" : [
+		 ],
+	"super" : "WAComponent",
+	"type" : "normal" }

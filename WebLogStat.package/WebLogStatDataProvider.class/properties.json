@@ -1,0 +1,14 @@
+{
+	"category" : "WebLogStat",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Logs" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "WebLogStatDataProvider",
+	"pools" : [
+		 ],
+	"super" : "WARestfulHandler",
+	"type" : "normal" }

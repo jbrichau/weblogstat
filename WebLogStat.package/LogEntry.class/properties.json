@@ -1,0 +1,14 @@
+{
+	"category" : "WebLogStat",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LogEntry",
+	"pools" : [
+		 ],
+	"super" : "GRSmallDictionary",
+	"type" : "normal" }
