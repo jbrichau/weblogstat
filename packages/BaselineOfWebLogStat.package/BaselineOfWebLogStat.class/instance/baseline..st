@@ -29,7 +29,7 @@ baseline: spec
 			
 		spec
 		 	package: 'WebLogStat' with: [ 
-				spec requires: #( 'TwitterBootstrap' 'Seaside30') ].
+				spec requires: #( 'TwitterBootstrap' 'Seaside30' 'Seaside-REST') ].
 		spec
 			group: 'default' with: #('WebLogStat').
 		]
