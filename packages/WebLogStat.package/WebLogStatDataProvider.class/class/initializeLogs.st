@@ -1,6 +1,8 @@
 initialization
 initializeLogs
-	Logs := OrderedCollection new.
-	((FileDirectory on:'/Users/jbrichau/NextPlan/Monitoring/logs/orderflow') entries reject:[:e |  ('.*' match: e name)])
-		do: [:entry | self processLog: (FileStream readOnlyFileNamed: entry fullName)]
-		displayingProgress: [:entry| 'Processing ', entry name].
+	Timings := Dictionary new.
+	ProblemTimings := Dictionary new.
+	Disconnects := Dictionary new.
+	InteractiveTimings := Dictionary new.
+	APITimings := Dictionary new.
+	RepAPITimings := Dictionary new.

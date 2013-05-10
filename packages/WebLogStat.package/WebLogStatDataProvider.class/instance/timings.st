@@ -3,10 +3,9 @@ timings
 	<get>
 	<path: '/timings.json'>
 
-	| anObject groupedByDate allDates firstdate lastdate series1 series2 all series3 series4 |
+	| anObject allDates firstdate lastdate summary series1 series2 series3 series4 |
 	
-	groupedByDate := Logs groupedBy: [:entry | entry date].
-	allDates := groupedByDate keys sorted:[:a :b | a <= b].
+	allDates := Timings keys sorted:[:a :b | a <= b].
 	firstdate := allDates first.
 	lastdate := allDates last.
 	series1 := OrderedCollection new.
@@ -14,12 +13,12 @@ timings
 	series3 := OrderedCollection new.
 	series4 := OrderedCollection new.
 	(firstdate to: lastdate) dates doWithIndex:[:aDate :index |
-			all := (groupedByDate at: aDate ifAbsent:[#()]).
-			series1 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (all select:[:e | e time <= 0.300]) size; yourself).
-			series2 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (all select:[:e | e time > 0.300 and:[e time <= 1]]) size; yourself).
-			series3 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (all select:[:e | e time > 1 and:[e time <= 3]]) size; yourself).
-			series4 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (all select:[:e | e time > 3]) size; yourself).] .
-	
+			summary := (Timings at: aDate ifAbsent:[Dictionary new]).
+			series1 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (summary at: #series1 ifAbsent:[0]); yourself).
+			series2 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (summary at: #series2 ifAbsent:[0]); yourself).
+			series3 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (summary at: #series3 ifAbsent:[0]); yourself).
+			series4 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (summary at: #series4 ifAbsent:[0]); yourself).] .
+
 	self requestContext respond:[:response | 
 			response stream json: (OrderedCollection new 
 										add: (Dictionary new at: 'name' put: 'Light speed (<300ms)'; at:'color' put: 'darkgreen';at: 'data' put: series1;yourself);

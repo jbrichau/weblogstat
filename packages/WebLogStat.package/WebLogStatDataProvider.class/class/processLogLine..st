@@ -19,9 +19,10 @@ processLogLine: aStream
 	self addEntry: (LogEntry new 
 		attributeAt: #datetime put: (self dateAndTimeFrom: datetime readStream);
 		attributeAt: #sessionkey put: (self sessionKeyIn: request);
+		attributeAt: #request put: request; 
 		attributeAt: #status put: status;
 		attributeAt: #bytes put: bytes asInteger;
-		attributeAt: #referrer put: referrer;
+		"attributeAt: #referrer put: referrer;"
 		attributeAt: #useragent put: useragent;
-		attributeAt: #time put: (Float readFrom: time readStream);
+		attributeAt: #time put: (ScaledDecimal readFrom: time readStream);
 		yourself).

@@ -3,7 +3,12 @@
 	"classinstvars" : [
 		 ],
 	"classvars" : [
-		"Logs" ],
+		"APITimings",
+		"Disconnects",
+		"InteractiveTimings",
+		"ProblemTimings",
+		"RepAPITimings",
+		"Timings" ],
 	"commentStamp" : "",
 	"instvars" : [
 		 ],

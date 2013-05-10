@@ -77,6 +77,24 @@
 				<div id="legend3"></div>
 			</div>
 		</div>
+    </div>
+      <h2>API timings</h2>
+      <div class="row">
+        <div class="chart_container">
+        <div id="y_axis4"></div>
+        <div id="chart4"></div>
+        <div id="legend4"></div>
+      </div>
+    </div>
+    </div>
+      <h2>Reporting API timings</h2>
+      <div class="row">
+        <div class="chart_container">
+        <div id="y_axis5"></div>
+        <div id="chart5"></div>
+        <div id="legend5"></div>
+      </div>
+    </div>
   	</div>
 	<script>
 
@@ -156,6 +174,60 @@ var legend = new Rickshaw.Graph.Legend( {
   		  xFormatter: function(x) { return "date:"+ new Date(x*1000) },
    		 yFormatter: function(y) { return y + " requests" }
 		})}
+} );
+
+var ajaxGraph4 = new Rickshaw.Graph.Ajax( {
+  renderer: 'bar',
+  width: 800,
+      height: 250,
+  element: document.getElementById("chart4"),
+  dataURL: 'http://localhost:8080/data/apitimings.json',
+  onComplete: function(transport) {
+  var x_axis4 = new Rickshaw.Graph.Axis.Time( { graph: transport.graph } );
+var y_axis4 = new Rickshaw.Graph.Axis.Y( {
+        graph: transport.graph,
+        orientation: 'left',
+        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+        element: document.getElementById('y_axis4'),
+} );
+  y_axis4.render();
+var legend = new Rickshaw.Graph.Legend( {
+  graph: transport.graph,
+  element: document.getElementById('legend4')
+
+} );
+  var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: transport.graph,
+        xFormatter: function(x) { return "date:"+ new Date(x*1000) },
+       yFormatter: function(y) { return y + " requests" }
+    })}
+} );
+
+var ajaxGraph5 = new Rickshaw.Graph.Ajax( {
+  renderer: 'bar',
+  width: 800,
+      height: 250,
+  element: document.getElementById("chart5"),
+  dataURL: 'http://localhost:8080/data/repapitimings.json',
+  onComplete: function(transport) {
+  var x_axis5 = new Rickshaw.Graph.Axis.Time( { graph: transport.graph } );
+var y_axis5 = new Rickshaw.Graph.Axis.Y( {
+        graph: transport.graph,
+        orientation: 'left',
+        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+        element: document.getElementById('y_axis5'),
+} );
+  y_axis5.render();
+var legend = new Rickshaw.Graph.Legend( {
+  graph: transport.graph,
+  element: document.getElementById('legend5')
+
+} );
+  var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: transport.graph,
+        xFormatter: function(x) { return "date:"+ new Date(x*1000) },
+       yFormatter: function(y) { return y + " requests" }
+    })}
 } );
 </script>
 </body>
