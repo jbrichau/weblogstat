@@ -5,6 +5,7 @@
 	"classvars" : [
 		"APITimings",
 		"Disconnects",
+		"EntriesPerDate",
 		"InteractiveTimings",
 		"ProblemTimings",
 		"RepAPITimings",

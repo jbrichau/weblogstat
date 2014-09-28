@@ -1,7 +1,7 @@
 private
 sessionKeyIn: aRequest
-	|tokens|
-	tokens := (aRequest findBetweenSubStrs: #('_s' '&')).
-	^ tokens size > 1
-		ifTrue:[tokens at: 2]
-		ifFalse:['']
+	| start end |
+	start := aRequest indexOfSubCollection:'_s'.
+	start = 0 ifTrue:[ ^ ''].
+	end := aRequest indexOfAnyOf: '& ' startingAt: start.
+	^ aRequest copyFrom: start to: end - 1.

@@ -1,4 +1,4 @@
-as yet unclassified
+api
 disconnects
 	<get>
 	<path: '/disconnects.json'>

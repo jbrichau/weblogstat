@@ -1,5 +1,6 @@
 initialization
 initializeLogs
+	EntriesPerDate := Dictionary new.
 	Timings := Dictionary new.
 	ProblemTimings := Dictionary new.
 	Disconnects := Dictionary new.

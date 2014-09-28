@@ -3,6 +3,9 @@ addEntry: anEntry
 	| summary |
 	(self isValidEntry: anEntry) ifFalse:[^ self].
 	(self isResourceEntry: anEntry) ifTrue:["anEntry timediff > 2 ifTrue:[Transcript show: anEntry line;cr]." ^ self].
+	
+	((EntriesPerDate at: anEntry date ifAbsentPut:[Dictionary new])
+		at: anEntry sessionkey ifAbsentPut:[Set new]) add: anEntry.
 
 	summary := Timings at: anEntry date ifAbsentPut:[Dictionary new].
 	anEntry time <= 0.300 ifTrue:[summary at: #series1 put: (summary at: #series1 ifAbsent:[0]) + 1].
@@ -46,4 +49,5 @@ addEntry: anEntry
 			(anEntry timediff > 5) ifTrue:[summary at: #series4 put: (summary at: #series4 ifAbsent:[0]) + 1].
 
 	(anEntry attributeAt: #status) = '499' ifTrue:[
-		Disconnects at: anEntry date put: (Disconnects at: anEntry date ifAbsent:[0]) + 1]
+		Disconnects at: anEntry date put: (Disconnects at: anEntry date ifAbsent:[0]) + 1].
+	

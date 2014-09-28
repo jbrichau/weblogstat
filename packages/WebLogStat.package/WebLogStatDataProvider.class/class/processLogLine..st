@@ -27,7 +27,6 @@ processLogLine: aStream
 		"attributeAt: #referrer put: referrer;"
 		attributeAt: #useragent put: useragent;
 		attributeAt: #time put: (ScaledDecimal readFrom: requesttime readStream);
-		attributeAt: #line put: aStream contents;
 		yourself).
 	(upstreamtime = '' or:[upstreamtime = '-']) ifFalse:[
 		entry attributeAt: #upstreamtime put: (ScaledDecimal readFrom: upstreamtime readStream)].

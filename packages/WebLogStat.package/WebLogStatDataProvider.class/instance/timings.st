@@ -1,4 +1,4 @@
-as yet unclassified
+api
 timings
 	<get>
 	<path: '/timings.json'>

@@ -1,4 +1,4 @@
-as yet unclassified
+api
 timeouts
 	<get>
 	<path: '/timeouts.json'>

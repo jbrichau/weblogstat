@@ -1,4 +1,4 @@
-as yet unclassified
+api
 repapitimings
 	<get>
 	<path: '/repapitimings.json'>

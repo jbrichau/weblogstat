@@ -1,4 +1,4 @@
-as yet unclassified
+api
 slowconnection
 	<get>
 	<path: '/slowconnection.json'>
@@ -13,7 +13,7 @@ slowconnection
 	series3 := OrderedCollection new.
 	series4 := OrderedCollection new.
 	(firstdate to: lastdate) dates doWithIndex:[:aDate :index |
-			summary := (Timings at: aDate ifAbsent:[Dictionary new]).
+			summary := (SlowConnectionTimings at: aDate ifAbsent:[Dictionary new]).
 			series1 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (summary at: #series1 ifAbsent:[0]); yourself).
 			series2 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (summary at: #series2 ifAbsent:[0]); yourself).
 			series3 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: (summary at: #series3 ifAbsent:[0]); yourself).
