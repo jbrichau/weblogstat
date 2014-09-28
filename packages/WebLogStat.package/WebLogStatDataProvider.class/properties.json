@@ -8,6 +8,8 @@
 		"InteractiveTimings",
 		"ProblemTimings",
 		"RepAPITimings",
+		"SlowConnectionTimings",
+		"Timeouts",
 		"Timings" ],
 	"commentStamp" : "",
 	"instvars" : [

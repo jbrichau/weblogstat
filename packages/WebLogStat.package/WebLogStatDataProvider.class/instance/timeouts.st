@@ -1,20 +1,20 @@
 as yet unclassified
-disconnects
+timeouts
 	<get>
-	<path: '/disconnects.json'>
+	<path: '/timeouts.json'>
 
-	| anObject groupedByDate allDates firstdate lastdate series1 series2 all series3 series4 |
+	|  allDates firstdate lastdate series1 all  |
 	
-	allDates := Disconnects keys sorted:[:a :b | a <= b].
+	allDates := Timeouts keys sorted:[:a :b | a <= b].
 	allDates isEmpty ifTrue:[self flag: 'hack'. self requestContext respond:[:response | response stream json: OrderedCollection new]. ^self].
 	firstdate := allDates first.
 	lastdate := allDates last.
 	series1 := OrderedCollection new.
 	(firstdate to: lastdate) dates doWithIndex:[:aDate :index |
-			all := (Disconnects at: aDate ifAbsent:[0]).
+			all := (Timeouts at: aDate ifAbsent:[0]).
 			series1 add: (Dictionary new at: 'x' put: aDate asDateAndTime asUnixTime; at: 'y' put: all; yourself)] .
 	
 	self requestContext respond:[:response | 
 			response stream json: (OrderedCollection new 
-										add: (Dictionary new at: 'name' put: '499'; at:'color' put: 'red';at: 'data' put: series1;yourself);
+										add: (Dictionary new at: 'name' put: 'timeout'; at:'color' put: 'red';at: 'data' put: series1;yourself);
 										yourself)]

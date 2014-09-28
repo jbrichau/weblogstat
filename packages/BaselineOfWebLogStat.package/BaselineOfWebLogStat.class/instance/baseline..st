@@ -5,31 +5,30 @@ baseline: spec
   spec for: #common do: [
 							
 		spec		
-			project: 'Seaside30' with: [
+			project: 'Seaside3' with: [
 				spec
-					className: 'ConfigurationOfSeaside30';
-					versionString: '3.0.7';
-					repository: 'http://www.squeaksource.com/MetacelloRepository' ].
+					className: 'ConfigurationOfSeaside3';
+					versionString: #'release3.1';
+					loads: #('REST' 'JQuery' 'JSON');
+					repository: 'http://www.smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main' ].
 				
-		"Seaside REST"
-		spec
-			project: 'Seaside-REST' with: [
-					spec
-						className: 'ConfigurationOfSeasideRest';
-						file: 'ConfigurationOfSeasideRest';	
-						version: '0.22';
-						repository: 'http://www.squeaksource.com/MetacelloRepository'].
+		spec		
+			project: 'Rickshaw' with: [
+				spec
+					className: 'ConfigurationOfRickshaw';
+					versionString: #development;
+					repository: 'http://smalltalkhub.com/mc/emaringolo/rickshaw/main' ].
 			
 		spec		
-			project: 'TwitterBootstrap' with: [
+			project: 'Bootstrap' with: [
 				spec
-					className: 'ConfigurationOfTwitterBootstrap';
+					className: 'ConfigurationOfBootstrap';
 					versionString: #stable;
-					repository: 'http://ss3.gemstone.com/ss/TwitterBootstrap' ].
+					repository: 'http://smalltalkhub.com/mc/TorstenBergmann/Bootstrap/main' ].
 			
 		spec
 		 	package: 'WebLogStat' with: [ 
-				spec requires: #( 'TwitterBootstrap' 'Seaside30' 'Seaside-REST') ].
+				spec requires: #( 'Bootstrap' 'Seaside3' 'Rickshaw') ].
 		spec
 			group: 'default' with: #('WebLogStat').
 		]
