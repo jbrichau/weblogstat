@@ -5,7 +5,7 @@ addEntry: anEntry
 	(self isResourceEntry: anEntry) ifTrue:["anEntry timediff > 2 ifTrue:[Transcript show: anEntry line;cr]." ^ self].
 	
 	((EntriesPerDate at: anEntry date ifAbsentPut:[Dictionary new])
-		at: anEntry sessionkey ifAbsentPut:[Set new]) add: anEntry.
+		at: anEntry sessionkey ifAbsentPut:[SortedCollection sortBlock:[:e1 :e2 | e1 x <= e2 x ] ]) add: anEntry asPoint.
 
 	summary := Timings at: anEntry date ifAbsentPut:[Dictionary new].
 	anEntry time <= 0.300 ifTrue:[summary at: #series1 put: (summary at: #series1 ifAbsent:[0]) + 1].

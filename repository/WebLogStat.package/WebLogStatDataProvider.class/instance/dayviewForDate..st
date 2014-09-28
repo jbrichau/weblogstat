@@ -7,9 +7,11 @@ dayviewForDate: aDate
 	
 	allSeries := EntriesPerDate at: (DateAndTime fromUnixTime: aDate asInteger) asDate.
 	series := OrderedCollection new.
-	allSeries keysAndValuesDo:[:sessionKey :entries | |thisseries|
-			thisseries := (entries sorted: [:e1 :e2 | e1 datetime <= e2 datetime]) collect:[:entry | (Dictionary new at: 'x' put: entry datetime asUnixTime; at: 'y' put: ((entry time) * 1000) rounded; yourself)].
-			series add: (Dictionary new at: 'name' put: sessionKey; at: 'data' put: thisseries;yourself)].
+	allSeries keysAndValuesDo:[:sessionKey :sessionseries |
+			series add: (Dictionary new 
+									at: 'name' put: sessionKey; 
+									at: 'data' put: (sessionseries collect:[:point | GRSmallDictionary new add: 'x'->point x; add:'y'->point y;yourself]);
+									yourself)].
 
 	self requestContext respond:[:response | 
 			response stream json: series]
