@@ -104,6 +104,8 @@
     </div>
 	<script>
 
+var activeDate;
+
 function makeRequestTimingGraph(id,dataurl) {
   var ajaxGraph1 = new Rickshaw.Graph.Ajax( {
     renderer: 'bar',
@@ -112,20 +114,21 @@ function makeRequestTimingGraph(id,dataurl) {
     element: document.getElementById("chart"+id),
     dataURL: dataurl,
     onComplete: function(transport) {
-      var y_axis1 = new Rickshaw.Graph.Axis.Y( {
+      var y_axis = new Rickshaw.Graph.Axis.Y( {
         graph: transport.graph,
         orientation: 'left',
         tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
         element: document.getElementById("y_axis"+id)
       });
       
-      y_axis1.render();
+      y_axis.render();
       var legend = new Rickshaw.Graph.Legend( {
         graph: transport.graph,
         element: document.getElementById('legend'+id)});
       var hoverDetail = new Rickshaw.Graph.HoverDetail( {
   		  graph: transport.graph,
-  		  xFormatter: function(x) { return "date:"+ new Date(x*1000) },
+        onShow: function(){ activeDate = (new Date($(".x_label").text()).getTime()) / 1000;},
+  		  xFormatter: function(x) { return new Date(x*1000) },
         yFormatter: function(y) { return y + " requests" }
       })
     }
@@ -139,6 +142,8 @@ makeRequestTimingGraph("4","http://localhost:8080/data/apitimings.json");
 makeRequestTimingGraph("5","http://localhost:8080/data/repapitimings.json");
 makeRequestTimingGraph("6","http://localhost:8080/data/timeouts.json");
 makeRequestTimingGraph("7","http://localhost:8080/data/slowconnection.json");
+
+$('#chart1').on('click', function() {var s = $("#chart1 .detail div.item.active").text(); window.open('day.html?date='+activeDate)});
 
 </script>
 </body>
