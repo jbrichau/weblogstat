@@ -12,10 +12,9 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet"/>
     <link href="./css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="./css/rickshaw.min.css" rel="stylesheet"/>
-	<script type="text/javascript" src="./js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="./js/jquery-ui-1.8.18.min.js"></script>
-	<script type="text/javascript" src="./js/d3.min.js"></script>
-	<script type="text/javascript" src="./js/d3.layout.min.js"></script>
+	<script type="text/javascript" src="./js/d3.v3.min.js"></script>
 	<script type="text/javascript" src="./js/rickshaw.min.js"></script>
 
     <style>
@@ -24,18 +23,18 @@
               position: relative;
               font-family: Arial, Helvetica, sans-serif;
       }
-      #chart1,#chart2 {
+      #chart1,#chart2,#chart3,#chart4 {
               display: inline-block;
               margin-left: 40px;
       }
-      #y_axis1,#y_axis2 {
+      #y_axis1,#y_axis2,#y_axis3,#y_axis4 {
               position: relative;
       	  float:left;
               top: 0;
               bottom: 0;
               width: 40px;
       }
-      #legend1,#legend2 {
+      #legend1,#legend2,#legend3,#legend4 {
               display: inline-block;
               vertical-align: top;
               margin: 0 0 0 10px;
@@ -55,180 +54,92 @@
   		<h1>Weblogstat</h1>
   		<h2>All response times</h2>
   		<div class="row">
-	  		<div class="chart_container">
+	  		<div class="chart_container"></div>
 				<div id="y_axis1"></div>
 				<div id="chart1"></div>
 				<div id="legend1"></div>
 			</div>
-		</div>
   		<h2>Focus slow response</h2>
    		<div class="row">
-	  		<div class="chart_container">
+	  		<div class="chart_container"></div>
 				<div id="y_axis2"></div>
 				<div id="chart2"></div>
 				<div id="legend2"></div>
 			</div>
-		</div>
   		<h2>Disconnects</h2>
   		<div class="row">
-  			<div class="chart_container">
+  			<div class="chart_container"></div>
 				<div id="y_axis3"></div>
 				<div id="chart3"></div>
 				<div id="legend3"></div>
 			</div>
-		</div>
-    </div>
+      <h2>Timeouts</h2>
+      <div class="row">
+        <div class="chart_container"></div>
+        <div id="y_axis6"></div>
+        <div id="chart6"></div>
+        <div id="legend6"></div>
+      </div>
       <h2>API timings</h2>
       <div class="row">
-        <div class="chart_container">
+        <div class="chart_container"></div>
         <div id="y_axis4"></div>
         <div id="chart4"></div>
         <div id="legend4"></div>
       </div>
-    </div>
-    </div>
       <h2>Reporting API timings</h2>
       <div class="row">
-        <div class="chart_container">
+        <div class="chart_container"></div>
         <div id="y_axis5"></div>
         <div id="chart5"></div>
         <div id="legend5"></div>
       </div>
+      <h2>Slow connection timings</h2>
+      <div class="row">
+        <div class="chart_container"></div>
+        <div id="y_axis7"></div>
+        <div id="chart7"></div>
+        <div id="legend7"></div>
+      </div>
     </div>
-  	</div>
 	<script>
 
-var ajaxGraph1 = new Rickshaw.Graph.Ajax( {
-	renderer: 'bar',
-	width: 800,
-      height: 250,
-	element: document.getElementById("chart1"),
-	dataURL: 'http://localhost:8080/data/timings.json',
-	onComplete: function(transport) {
-
-var y_axis1 = new Rickshaw.Graph.Axis.Y( {
+function makeRequestTimingGraph(id,dataurl) {
+  var ajaxGraph1 = new Rickshaw.Graph.Ajax( {
+    renderer: 'bar',
+    width: 800,
+    height: 250,
+    element: document.getElementById("chart"+id),
+    dataURL: dataurl,
+    onComplete: function(transport) {
+      var y_axis1 = new Rickshaw.Graph.Axis.Y( {
         graph: transport.graph,
         orientation: 'left',
-	  tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-        element: document.getElementById('y_axis1')});
-	y_axis1.render();
-	var legend = new Rickshaw.Graph.Legend( {
-	graph: transport.graph,
-	element: document.getElementById('legend1')});
-	var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+        element: document.getElementById("y_axis"+id)
+      });
+      
+      y_axis1.render();
+      var legend = new Rickshaw.Graph.Legend( {
+        graph: transport.graph,
+        element: document.getElementById('legend'+id)});
+      var hoverDetail = new Rickshaw.Graph.HoverDetail( {
   		  graph: transport.graph,
   		  xFormatter: function(x) { return "date:"+ new Date(x*1000) },
-   		 yFormatter: function(y) { return y + " requests" }
-		})}
-} );
+        yFormatter: function(y) { return y + " requests" }
+      })
+    }
+  });
+}
 
-var ajaxGraph2 = new Rickshaw.Graph.Ajax( {
-	renderer: 'bar',
-	width: 800,
-      height: 250,
-	element: document.getElementById("chart2"),
-	dataURL: 'http://localhost:8080/data/problemtimings.json',
-	onComplete: function(transport) {
-	var x_axis2 = new Rickshaw.Graph.Axis.Time( { graph: transport.graph } );
-var y_axis2 = new Rickshaw.Graph.Axis.Y( {
-        graph: transport.graph,
-        orientation: 'left',
-        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-        element: document.getElementById('y_axis2'),
-} );
-	y_axis2.render();
-var legend = new Rickshaw.Graph.Legend( {
-	graph: transport.graph,
-	element: document.getElementById('legend2')
+makeRequestTimingGraph("1","http://localhost:8080/data/timings.json");
+makeRequestTimingGraph("2","http://localhost:8080/data/problemtimings.json");
+makeRequestTimingGraph("3","http://localhost:8080/data/disconnects.json");
+makeRequestTimingGraph("4","http://localhost:8080/data/apitimings.json");
+makeRequestTimingGraph("5","http://localhost:8080/data/repapitimings.json");
+makeRequestTimingGraph("6","http://localhost:8080/data/timeouts.json");
+makeRequestTimingGraph("7","http://localhost:8080/data/slowconnection.json");
 
-} );
-	var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-  		  graph: transport.graph,
-  		  xFormatter: function(x) { return "date:"+ new Date(x*1000) },
-   		 yFormatter: function(y) { return y + " requests" }
-		})}
-} );
-
-var ajaxGraph3 = new Rickshaw.Graph.Ajax( {
-	renderer: 'bar',
-	width: 800,
-      height: 250,
-	element: document.getElementById("chart3"),
-	dataURL: 'http://localhost:8080/data/disconnects.json',
-	onComplete: function(transport) {
-	var x_axis3 = new Rickshaw.Graph.Axis.Time( { graph: transport.graph } );
-var y_axis3 = new Rickshaw.Graph.Axis.Y( {
-        graph: transport.graph,
-        orientation: 'left',
-        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-        element: document.getElementById('y_axis3'),
-} );
-	y_axis3.render();
-var legend = new Rickshaw.Graph.Legend( {
-	graph: transport.graph,
-	element: document.getElementById('legend3')
-
-} );
-	var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-  		  graph: transport.graph,
-  		  xFormatter: function(x) { return "date:"+ new Date(x*1000) },
-   		 yFormatter: function(y) { return y + " requests" }
-		})}
-} );
-
-var ajaxGraph4 = new Rickshaw.Graph.Ajax( {
-  renderer: 'bar',
-  width: 800,
-      height: 250,
-  element: document.getElementById("chart4"),
-  dataURL: 'http://localhost:8080/data/apitimings.json',
-  onComplete: function(transport) {
-  var x_axis4 = new Rickshaw.Graph.Axis.Time( { graph: transport.graph } );
-var y_axis4 = new Rickshaw.Graph.Axis.Y( {
-        graph: transport.graph,
-        orientation: 'left',
-        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-        element: document.getElementById('y_axis4'),
-} );
-  y_axis4.render();
-var legend = new Rickshaw.Graph.Legend( {
-  graph: transport.graph,
-  element: document.getElementById('legend4')
-
-} );
-  var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-        graph: transport.graph,
-        xFormatter: function(x) { return "date:"+ new Date(x*1000) },
-       yFormatter: function(y) { return y + " requests" }
-    })}
-} );
-
-var ajaxGraph5 = new Rickshaw.Graph.Ajax( {
-  renderer: 'bar',
-  width: 800,
-      height: 250,
-  element: document.getElementById("chart5"),
-  dataURL: 'http://localhost:8080/data/repapitimings.json',
-  onComplete: function(transport) {
-  var x_axis5 = new Rickshaw.Graph.Axis.Time( { graph: transport.graph } );
-var y_axis5 = new Rickshaw.Graph.Axis.Y( {
-        graph: transport.graph,
-        orientation: 'left',
-        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-        element: document.getElementById('y_axis5'),
-} );
-  y_axis5.render();
-var legend = new Rickshaw.Graph.Legend( {
-  graph: transport.graph,
-  element: document.getElementById('legend5')
-
-} );
-  var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-        graph: transport.graph,
-        xFormatter: function(x) { return "date:"+ new Date(x*1000) },
-       yFormatter: function(y) { return y + " requests" }
-    })}
-} );
 </script>
 </body>
 </html>
