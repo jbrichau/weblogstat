@@ -8,8 +8,8 @@ baseline: spec
 			project: 'Seaside3' with: [
 				spec
 					className: 'ConfigurationOfSeaside3';
-					versionString: #'release3.1';
-					loads: #('REST' 'JQuery' 'JSON');
+					versionString: #development;
+					loads: #('REST' 'JQuery' 'JSON' 'Filesystem');
 					repository: 'http://www.smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main' ].
 				
 		spec		
