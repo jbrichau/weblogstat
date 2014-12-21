@@ -8,16 +8,9 @@ baseline: spec
 			project: 'Seaside3' with: [
 				spec
 					className: 'ConfigurationOfSeaside3';
-					versionString: #development;
-					loads: #('REST' 'JQuery' 'JSON' 'Filesystem');
+					versionString: #stable;
+					loads: #('REST' 'JQuery' 'JSON' 'Filesystem' 'Zinc');
 					repository: 'http://www.smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main' ].
-				
-		spec		
-			project: 'Rickshaw' with: [
-				spec
-					className: 'ConfigurationOfRickshaw';
-					versionString: #development;
-					repository: 'http://smalltalkhub.com/mc/emaringolo/rickshaw/main' ].
 			
 		spec		
 			project: 'Bootstrap' with: [
@@ -28,7 +21,7 @@ baseline: spec
 			
 		spec
 		 	package: 'WebLogStat' with: [ 
-				spec requires: #( 'Bootstrap' 'Seaside3' 'Rickshaw') ].
+				spec requires: #( 'Bootstrap' 'Seaside3') ].
 		spec
 			group: 'default' with: #('WebLogStat').
 		]
