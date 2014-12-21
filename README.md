@@ -12,36 +12,24 @@ WebLogStat is currently under development and not ready for public use.
 
 * Download the last stable [Pharo Smalltalk](http://www.pharo-project.org).
 
-* Load [Metacello](https://github.com/dalehenrich/metacello-work) version 1.0-beta.32
-
-```Smalltalk
-	"Get the Metacello configuration"
-	Gofer new
-  		gemsource: 'metacello';
-  		package: 'ConfigurationOfMetacello';
-  		load.
-
-	"Bootstrap Metacello 1.0-beta.32, using mcz files"
-	((Smalltalk at: #ConfigurationOfMetacello) project 
-  		version: '1.0-beta.32') load.
-
-  	(Smalltalk at: #Metacello) new
-  		configuration: 'MetacelloPreview';
-  		version: #stable;
-  		repository: 'github://dalehenrich/metacello-work:configuration';
-  		load.
-```
-
 * Load WebLogStat
 
 ```Smalltalk
 	(Smalltalk at: #Metacello) new
 		baseline: 'WebLogStat';
-		repository: 'github://jbrichau/weblogstat/packages';
+		repository: 'github://jbrichau/weblogstat/repository';
 		load.
 ```
 
 * Download the [Rickshaw](http://code.shutterstock.com/rickshaw/) js graphing library and its prerequisite js library [d3](http://www.d3js.org).
+
+* Setup a Zinc http server using the Seaside control panel or execute:
+
+```Smalltalk
+ZnZincServerAdaptor startOn: 8080
+```
+
+*  Open the `webapp/index.html` file
 
 ## Dependencies
 
@@ -50,7 +38,7 @@ WebLogStat uses:
 * Twitter Bootstrap
 * [Rickshaw](http://code.shutterstock.com/rickshaw/) js graphing library (which requires [d3](http://www.d3js.org))
 
-* Development
+## Development
 If you intend to develop, follow these steps:
 
 * Load [FileTree](https://github.com/dalehenrich/filetree) in the Pharo image:
