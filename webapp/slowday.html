@@ -1,0 +1,160 @@
+<!doctype html>
+<head>
+	<link href="./css/rickshaw.min.css" rel="stylesheet"/>
+	<link href="./css/extensions.css" rel="stylesheet"/>
+	<link href="./css/jquery-ui.css" rel="stylesheet"/>
+	<script type="text/javascript" src="./js/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui-1.8.18.min.js"></script>
+	<script type="text/javascript" src="./js/d3.v3.min.js"></script>
+	<script type="text/javascript" src="./js/rickshaw.min.js"></script>
+	<script type="text/javascript" src="./js/underscore-min.js"></script>
+	<script>
+		jQuery.noConflict();
+	</script>
+
+	<script src="js/extensions.js"></script>
+</head>
+<body>
+
+<div id="content">
+
+	<form id="side_panel">
+		<h1>Session timings</h1>
+		<section><div id="legend"></div></section>
+	</form>
+
+	<div id="chart_container">
+		<div id="chart"></div>
+		<div id="timeline"></div>
+		<div id="preview"></div>
+	</div>
+
+</div>
+
+<script>
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var palette = new Rickshaw.Color.Palette( { scheme: 'classic9' } );
+
+// instantiate our graph!
+
+var ajaxgraph = new Rickshaw.Graph.Ajax( {
+	element: document.getElementById("chart"),
+	width: 1200,
+	height: 600,
+	renderer: 'line',
+	stack: false,
+	stroke: true,
+	preserve: true,
+	dataURL: '/data/slowdayview.json?date='+getParameterByName("date"),
+	onData: function(d) { _.map(d,function(series){ series.color = palette.color(); return series;}); return d; },
+	onComplete: drawDayView
+} );
+
+function drawDayView(transport) {
+
+var preview = new Rickshaw.Graph.RangeSlider( {
+	graph: transport.graph,
+	element: document.getElementById('preview'),
+} ); 
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+	graph: transport.graph,
+	xFormatter: function(x) {
+		return new Date(x * 1000).toString();
+	}
+} );
+
+/*
+var annotator = new Rickshaw.Graph.Annotate( {
+	graph: graph,
+	element: document.getElementById('timeline')
+} ); */
+
+var legend = new Rickshaw.Graph.Legend( {
+	graph: transport.graph,
+	element: document.getElementById('legend')
+
+} );
+
+var shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
+	graph: transport.graph,
+	legend: legend
+} );
+/*
+var order = new Rickshaw.Graph.Behavior.Series.Order( {
+	graph: graph,
+	legend: legend
+} );
+
+var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight( {
+	graph: graph,
+	legend: legend
+} );
+
+var smoother = new Rickshaw.Graph.Smoother( {
+	graph: graph,
+	element: document.querySelector('#smoother')
+} );*/
+
+var ticksTreatment = 'glow';
+
+var xAxis = new Rickshaw.Graph.Axis.Time( {
+	graph: transport.graph,
+	ticksTreatment: ticksTreatment,
+    timeUnit: (new Rickshaw.Fixtures.Time()).unit('hour')
+} );
+
+xAxis.render();
+
+
+var yAxis = new Rickshaw.Graph.Axis.Y( {
+	graph: transport.graph,
+	tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+	ticksTreatment: ticksTreatment
+} );
+
+yAxis.render();
+
+/*var controls = new RenderControls( {
+	element: document.querySelector('form'),
+	graph: graph
+} );
+
+// add some data every so often
+
+var messages = [
+	"Changed home page welcome message",
+	"Minified JS and CSS",
+	"Changed button color from blue to green",
+	"Refactored SQL query to use indexed columns",
+	"Added additional logging for debugging",
+	"Fixed typo",
+	"Rewrite conditional logic for clarity",
+	"Added documentation for new methods"
+];
+
+function addAnnotation(force) {
+	if (messages.length > 0 && (force || Math.random() >= 0.95)) {
+		annotator.add(seriesData[2][seriesData[2].length-1].x, messages.shift());
+		annotator.update();
+	}
+}
+
+var previewXAxis = new Rickshaw.Graph.Axis.Time({
+	graph: preview.previews[0],
+	ticksTreatment: ticksTreatment
+});
+
+previewXAxis.render();*/
+}
+
+</script>
+
+</body>

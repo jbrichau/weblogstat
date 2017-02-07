@@ -144,6 +144,7 @@ makeRequestTimingGraph("6","http://localhost:8080/data/timeouts.json");
 makeRequestTimingGraph("7","http://localhost:8080/data/slowconnection.json");
 
 $('#chart1').on('click', function() {var s = $("#chart1 .detail div.item.active").text(); window.open('day.html?date='+activeDate)});
+$('#chart2').on('click', function() {var s = $("#chart2 .detail div.item.active").text(); window.open('slowday.html?date='+activeDate)});
 
 </script>
 </body>
